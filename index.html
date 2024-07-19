@@ -14,7 +14,7 @@
   <script>
     function getResult() {
       var rollNo = document.getElementById("rollNo").value;
-      var url = "YOUR_WEB_APP_URL?rollNo=" + rollNo;
+      var url = "https://script.google.com/macros/s/AKfycbxNRvWDjt0vE6Pr0gjc03YF5KU17AWx9jX1NOtDwOUWx2Mfx9eM4kF3YJDr5rIx0UwPZA/exec?rollNo=" + rollNo;
 
       fetch(url)
         .then(response => response.json())
