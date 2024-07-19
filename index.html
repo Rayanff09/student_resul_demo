@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>School Result</title>
+</head>
+<body>
+  <h2>Enter Roll Number</h2>
+  <form id="resultForm">
+    Roll Number: <input type="number" id="rollNo" required><br>
+    <button type="button" onclick="getResult()">Submit</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    function getResult() {
+      var rollNo = document.getElementById("rollNo").value;
+      var url = "YOUR_WEB_APP_URL?rollNo=" + rollNo;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          var resultDiv = document.getElementById("result");
+          if (data.name) {
+            resultDiv.innerHTML = `
+              <p>Name: ${data.name}</p>
+              <p>Father Name: ${data.fatherName}</p>
+              <p>Bengali: ${data.bengali}</p>
+              <p>English: ${data.english}</p>
+              <p>Math: ${data.math}</p>
+              <p>Total: ${data.total}</p>
+              <p>Division: ${data.division}</p>
+            `;
+          } else {
+            resultDiv.innerHTML = `<p>${data}</p>`;
+          }
+        });
+    }
+  </script>
+</body>
+</html>
