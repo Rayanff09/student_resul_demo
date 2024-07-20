@@ -71,10 +71,15 @@
   <script>
     function getResult() {
       var rollNo = document.getElementById("rollNo").value;
-      var url = "https://script.google.com/macros/s/AKfycbyRPzEHZ3Ge63Q1V_8NJ9XUYNoEzReVpl4G3lvQ2KR85JZlP6EHbwo5cXi2_iI278xgKA/exec?rollNo=" + rollNo;
+      var url = "https://script.google.com/macros/s/AKfycby_t9tPipRJhuw55dzQ2Fz7aK1tMsq-7NUDOcehEU7NSyd1SP1VO2lc270KlwCEM05MTQ/exec?rollNo=" + rollNo;
 
       fetch(url)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
         .then(data => {
           var resultDiv = document.getElementById("result");
           if (data.name) {
@@ -90,6 +95,10 @@
           } else {
             resultDiv.innerHTML = <p>${data}</p>;
           }
+        })
+        .catch(error => {
+          var resultDiv = document.getElementById("result");
+          resultDiv.innerHTML = <p>Error: ${error.message}</p>;
         });
     }
   </script>
